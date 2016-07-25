@@ -95,12 +95,13 @@ void UserDbObject::OnConfigUpdate(void)
 
 			DbQuery query1;
 			query1.Table = DbType::GetByName("UserGroup")->GetTable() + "_members";
-			query1.Type = DbQueryInsert;
+			query1.Type = DbQueryInsert | DbQueryUpdate;
 			query1.Category = DbCatConfig;
 			query1.Fields = new Dictionary();
 			query1.Fields->Set("instance_id", 0); /* DbConnection class fills in real ID */
 			query1.Fields->Set("contactgroup_id", DbValue::FromObjectInsertID(group));
 			query1.Fields->Set("contact_object_id", user);
+			query1.Fields->Set("session_token", 0); /* DbConnection class fills in real ID */
 			query1.WhereCriteria = new Dictionary();
 			query1.WhereCriteria->Set("instance_id", 0); /* DbConnection class fills in real ID */
 			query1.WhereCriteria->Set("contactgroup_id", DbValue::FromObjectInsertID(group));

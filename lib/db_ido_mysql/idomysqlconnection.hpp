@@ -116,7 +116,8 @@ private:
 	void InternalNewTransaction(void);
 
 	virtual void ClearConfigTable(const String& table) override;
-	void ClearCustomVarTable(const String& table);
+	void ClearSessionTable(const String& table);
+	void ClearSessionTables(void);
 
 	void ExceptionHandler(boost::exception_ptr exp);
 

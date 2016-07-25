@@ -196,6 +196,7 @@ CREATE TABLE IF NOT EXISTS icinga_contactgroup_members (
   instance_id bigint unsigned default 0,
   contactgroup_id bigint unsigned default 0,
   contact_object_id bigint unsigned default 0,
+  session_token int default NULL,
   PRIMARY KEY  (contactgroup_member_id)
 ) ENGINE=InnoDB  COMMENT='Contactgroup members';
 
@@ -625,6 +626,7 @@ CREATE TABLE IF NOT EXISTS icinga_hostgroup_members (
   instance_id bigint unsigned default 0,
   hostgroup_id bigint unsigned default 0,
   host_object_id bigint unsigned default 0,
+  session_token int default NULL,
   PRIMARY KEY  (hostgroup_member_id)
 ) ENGINE=InnoDB  COMMENT='Hostgroup members';
 
@@ -1119,6 +1121,7 @@ CREATE TABLE IF NOT EXISTS icinga_servicegroup_members (
   instance_id bigint unsigned default 0,
   servicegroup_id bigint unsigned default 0,
   service_object_id bigint unsigned default 0,
+  session_token int default NULL,
   PRIMARY KEY  (servicegroup_member_id)
 ) ENGINE=InnoDB  COMMENT='Servicegroup members';
 

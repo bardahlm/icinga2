@@ -196,6 +196,7 @@ void ServiceDbObject::OnConfigUpdate(void)
 			query1.Fields->Set("instance_id", 0); /* DbConnection class fills in real ID */
 			query1.Fields->Set("servicegroup_id", DbValue::FromObjectInsertID(group));
 			query1.Fields->Set("service_object_id", service);
+			query1.Fields->Set("session_token", 0); /* DbConnection class fills in real ID */
 			query1.WhereCriteria = new Dictionary();
 			query1.WhereCriteria->Set("instance_id", 0); /* DbConnection class fills in real ID */
 			query1.WhereCriteria->Set("servicegroup_id", DbValue::FromObjectInsertID(group));

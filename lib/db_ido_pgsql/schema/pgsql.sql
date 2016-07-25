@@ -652,6 +652,7 @@ CREATE TABLE  icinga_hostgroup_members (
   instance_id bigint default 0,
   hostgroup_id bigint default 0,
   host_object_id bigint default 0,
+  session_token INTEGER default NULL,
   CONSTRAINT PK_hostgroup_member_id PRIMARY KEY (hostgroup_member_id)
 ) ;
 
@@ -1146,6 +1147,7 @@ CREATE TABLE  icinga_servicegroup_members (
   instance_id bigint default 0,
   servicegroup_id bigint default 0,
   service_object_id bigint default 0,
+  session_token INTEGER default NULL,
   CONSTRAINT PK_servicegroup_member_id PRIMARY KEY (servicegroup_member_id)
 ) ;
 

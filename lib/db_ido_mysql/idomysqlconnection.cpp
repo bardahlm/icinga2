@@ -414,10 +414,7 @@ void IdoMysqlConnection::Reconnect(void)
 
 	UpdateAllObjects();
 
-	/* delete all customvariables without current session token */
-	ClearCustomVarTable("customvariables");
-	ClearCustomVarTable("customvariablestatus");
-
+	m_QueryQueue.Enqueue(boost::bind(&IdoMysqlConnection::ClearSessionTables, this), PriorityLow);
 	m_QueryQueue.Enqueue(boost::bind(&IdoMysqlConnection::FinishConnect, this, startTime), PriorityLow);
 }
 
@@ -437,7 +434,17 @@ void IdoMysqlConnection::FinishConnect(double startTime)
 	Query("BEGIN");
 }
 
-void IdoMysqlConnection::ClearCustomVarTable(const String& table)
+void IdoMysqlConnection::ClearSessionTables(void)
+{
+	/* delete all customvariables and group members without current session token */
+	ClearSessionTable("customvariables");
+	ClearSessionTable("customvariablestatus");
+	ClearSessionTable("hostgroup_members");
+	ClearSessionTable("servicegroup_members");
+	ClearSessionTable("contactgroup_members");
+}
+
+void IdoMysqlConnection::ClearSessionTable(const String& table)
 {
 	Query("DELETE FROM " + GetTablePrefix() + table + " WHERE session_token <> " + Convert::ToString(m_SessionToken));
 }

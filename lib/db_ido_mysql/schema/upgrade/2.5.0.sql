@@ -61,6 +61,18 @@ CREATE INDEX idx_zonestatus_parent_object_id on icinga_zonestatus(parent_zone_ob
 CREATE INDEX idx_statehistory_cleanup on icinga_statehistory(instance_id, state_time);
 
 -- -----------------------------------------
+-- #12210
+-- -----------------------------------------
+
+ALTER TABLE icinga_hostgroup_members ADD COLUMN session_token int default NULL;
+ALTER TABLE icinga_servicegroup_members ADD COLUMN session_token int default NULL;
+ALTER TABLE icinga_contactgroup_members ADD COLUMN session_token int default NULL;
+
+CREATE INDEX idx_hg_session_del ON icinga_hostgroup_members (session_token);
+CREATE INDEX idx_sg_session_del ON icinga_servicegroup_members (session_token);
+CREATE INDEX idx_cg_session_del ON icinga_contactgroup_members (session_token);
+
+-- -----------------------------------------
 -- set dbversion
 -- -----------------------------------------
 INSERT INTO icinga_dbversion (name, version, create_time, modify_time) VALUES ('idoutils', '1.14.1', NOW(), NOW()) ON DUPLICATE KEY UPDATE version='1.14.1', modify_time=NOW();

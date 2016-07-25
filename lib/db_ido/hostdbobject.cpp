@@ -197,6 +197,7 @@ void HostDbObject::OnConfigUpdate(void)
 			query1.Fields->Set("instance_id", 0); /* DbConnection class fills in real ID */
 			query1.Fields->Set("hostgroup_id", DbValue::FromObjectInsertID(group));
 			query1.Fields->Set("host_object_id", host);
+			query1.Fields->Set("session_token", 0); /* DbConnection class fills in real ID */
 			query1.WhereCriteria = new Dictionary();
 			query1.WhereCriteria->Set("instance_id", 0); /* DbConnection class fills in real ID */
 			query1.WhereCriteria->Set("hostgroup_id", DbValue::FromObjectInsertID(group));
